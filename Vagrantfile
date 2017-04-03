@@ -13,4 +13,6 @@ Vagrant.configure("2") do |config|
     n.vm.synced_folder "install-jenkins/", "/Users/vagrant/install-jenkins", owner: "vagrant", group: "staff",  type: "rsync"
     set_hostname(n)
   end
+
+  config.vm.post_up_message = "You can access Jenkins at http://192.168.205.30:8080"
 end

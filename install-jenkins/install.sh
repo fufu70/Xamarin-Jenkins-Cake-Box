@@ -21,7 +21,7 @@ brew install jenkins
 nohup jenkins &
 
 # Install the Android SDK
-brew install android-sdk
+brew cask install android-sdk
 
 # Install Xamarin Studio
 brew cask install xamarin-studio
@@ -30,10 +30,36 @@ brew cask install xamarin-studio
 brew install wget
 wget https://download.mono-project.com/archive/4.8.0/macos-10-universal/MonoFramework-MDK-4.8.0.520.macos10.xamarin.universal.pkg
 sudo installer -pkg MonoFramework-MDK-4.8.0.520.macos10.xamarin.universal.pkg -target /
+sudo chmod 775 /Library/Frameworks/Mono.framework/Versions/Current/bin/mono
+
+# And .... the .Net core
+brew update
+brew install openssl
+mkdir -p /usr/local/lib
+ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
+ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
+ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
+
 
 ##########################
 # Code Analysis Tool:	 #
-# 	SonarQube			 #
+# 	PMD	(CPD)			 #
+# 	StyleCop			 #
 ##########################
-brew install sonar
-brew install sonar-scanner
+
+# Install PMD
+brew install pmd
+
+# Install StyleCop
+brew install mercurial
+git clone https://github.com/nelsonsar/StyleCop.Baboon
+
+cd StyleCop.Baboon
+sudo hg clone https://hg.codeplex.com/stylecop
+make # runs nuget and xbuild
+
+sudo chmod 775 StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe
+
+# Install Mono-Tools (for Gendarme) ... TODO
+# wget https://cloud.github.com/downloads/spouliot/gendarme/gendarme-2.10-bin.zip
+# unzip gendarme-2.10-bin.zip

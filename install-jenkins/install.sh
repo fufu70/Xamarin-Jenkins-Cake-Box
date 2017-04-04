@@ -1,13 +1,13 @@
 #!/bin/bash
 
 ###########################################################
-# 														  #
-# Assumtion:											  #
-# 														  #
-# 	Its assumed that the current version of OSX already   #
-# 	has Brew installed ... If not uncomment the 		  #
-# 	"/usr/bin/ruby" line below							  #
-# 														  #
+#                                                         #
+# Assumtion:                                              #
+#                                                         #
+#   Its assumed that the current version of OSX already   #
+#   has Brew installed ... If not uncomment the           #
+#   "/usr/bin/ruby" line below                            #
+#                                                         #
 ###########################################################
 
 # Install Brew
@@ -42,9 +42,10 @@ ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
 
 
 ##########################
-# Code Analysis Tool:	 #
-# 	PMD	(CPD)			 #
-# 	StyleCop			 #
+# Code Analysis Tool:    #
+#   PMD (CPD)            #
+#   StyleCop             #
+#   Gendarme             #
 ##########################
 
 # Install PMD
@@ -60,6 +61,15 @@ make # runs nuget and xbuild
 
 sudo chmod 775 StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe
 
-# Install Mono-Tools (for Gendarme) ... TODO
-# wget https://cloud.github.com/downloads/spouliot/gendarme/gendarme-2.10-bin.zip
-# unzip gendarme-2.10-bin.zip
+# Install Mono-Tools (for Gendarme) ... 
+# Currently only install Gendarme
+wget https://cloud.github.com/downloads/spouliot/gendarme/gendarme-2.10-bin.zip
+unzip gendarme-2.10-bin.zip
+
+# Installation from source currently a work in progress
+# brew install autoconf pkg-config readline automake gettext glib intltool libtool
+# git clone https://github.com/mono/mono-tools
+# cd mono-tools
+# PKG_CONFIG_PATH=/Library/Frameworks/Mono.framework/Versions/Current/lib/pkgconfig/
+# export PKG_CONFIG_PATH
+# ./autogen.sh

@@ -6,6 +6,8 @@ Ever feel the need to turn on the [Code Analysis Oven](https://media.giphy.com/m
 
 * [The Requirements](#the-requirements)
 * [The Process](#the-process)
+* [Troubleshooting](#troubleshooting)
+* [Thanks To](#thanks-to)
 
 ## The requirements
 
@@ -77,7 +79,43 @@ $ vagrant ssh
 $ bash install-jenkins/plugins.sh
 ```
 
-[Nice](https://media.giphy.com/media/3oEjI5VtIhHvK37WYo/giphy.gif)
+[Nice!](https://media.giphy.com/media/3oEjI5VtIhHvK37WYo/giphy.gif) For the icing on the Xamarin-Jenkins-Cake-Box, lets add some integration with those plugins!
+
+```shell
+$ bash install-jenkins/integration.sh
+```
+
+When running this command you'll be given an option to input a personal repository. If N is selected then the repository URL can be changed from the config section of the jenkins job at http://192.168.205.30:8080/job/xamarin-cake-box-job/configure. The second option below is the Source Code Management config, here you can set a repository url and credentials:
+
+![alt text][source-code-manager]
+
+Your done now, all you need to do now is simply click the "Build Now" button in your xamarin-cake-box-job and analyze on!
+
+## Troubleshooting
+
+### Content Security Policy Issues
+
+Okay my fellow [scrubs](http://i.giphy.com/YjJZKbm2kNN7i.gif)! You finally got your [first job to run](http://i.giphy.com/omRfGp0CeRShi.gif), you head over to your Gendarme html reportsat [http://192.168.205.30:8080/job/xamarin-cake-box-job/ws/gendarme.html](http://192.168.205.30:8080/job/xamarin-cake-box-job/ws/gendarme.html). [Whats this!](http://i.giphy.com/ToMjGpnXBTw7vnokxhu.gif)
+
+![alt text][blocked-css-gendarme]
+
+What are all these console errors!
+
+![alt text][blocked-script-console-errors]
+
+This is a direct issue with the [Content Security Policy](https://wiki.jenkins-ci.org/display/JENKINS/Configuring+Content+Security+Policy) issue. Were going to run a script inside of Jenkins internal console. Go to [http://192.168.205.30:8080/script](http://192.168.205.30:8080/script) and run:
+
+```groovy
+System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+```
+
+Inside of the script console.
+
+![alt text][script-console-execution]
+
+After running the script go back to the Gendarme results page at [http://192.168.205.30:8080/job/xamarin-cake-box-job/ws/gendarme.html](http://192.168.205.30:8080/job/xamarin-cake-box-job/ws/gendarme.html), hard refresh the page to clear your current [cache](http://i.giphy.com/VkYOrBIQv520M.gif), and view the splendor of no Content Security!
+
+![alt text][unblocked-css-gendarme]
 
 ## Thanks To
 
@@ -95,3 +133,8 @@ The MonoDevelop Teams
 [admin-user-jenkins]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/admin-user-jenkins.png "Admin User Creation"
 [installed-jenkins]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/installed-jenkins.png "Jenkins is installed"
 [tcp-port-for-jnlp]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/tcp-port-for-jnlp.png "TCP port for JNLP"
+[source-code-manager]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/source-code-manager.png "Source Code Manager"
+[blocked-css-gendarme]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/blocked-css-gendarme.png "Blocked CSS Gendarme"
+[blocked-script-console-errors]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/blocked-script-console-errors.png "Blocked Script Console Errors"
+[script-console-execution]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/script-console-execution.png "Script Console Execution"
+[unblocked-css-gendarme]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/unblocked-css-gendarme.png "Unblocked CSS Gendarme"

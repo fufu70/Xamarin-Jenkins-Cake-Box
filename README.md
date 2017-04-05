@@ -85,6 +85,10 @@ Andrew Dryga's [vagrant-osx-box](https://github.com/AndrewDryga/vagrant-box-osx)
 
 The Xamarin Developer Guide for a [CI setup in Jenkins](https://developer.xamarin.com/guides/cross-platform/ci/jenkins_walkthrough/)
 
+Nelson Senna's Code Sniffer [StyleCop.Baboon](https://github.com/nelsonsar/StyleCop.Baboon)
+
+The MonoDevelop Teams 
+
 [unlock-jenkins]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/unlock-jenkins.png "Unlock Jenkins"
 [customize-jenkins]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/customize-jenkins.png "Customize Jenkins"
 [plugins-installing-jenkins]: https://raw.githubusercontent.com/fufu70/Xamarin-Jenkins-Cake-Box/master/common/plugins-installing-jenkins.png "Plugins Installing"

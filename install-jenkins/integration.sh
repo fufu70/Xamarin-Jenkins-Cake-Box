@@ -25,3 +25,6 @@ fi
 sudo cat ~/install-jenkins/data/config.xml | sudo java -jar jenkins-cli.jar -s http://localhost:8080 create-job xamarin-cake-box-job  --username "$J_USERNAME" --password "$J_PASSWORD"
 
 sudo java -jar jenkins-cli.jar -s http://localhost:8080 reload-configuration  --username "$J_USERNAME" --password "$J_PASSWORD"
+
+# Move the poop image to the jenkins userContent section
+cp ~/install-jenkins/data/pile-of-poo.png ~/.jenkins/userContent/pile-of-poop.png

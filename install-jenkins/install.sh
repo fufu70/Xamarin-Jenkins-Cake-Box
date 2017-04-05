@@ -25,6 +25,10 @@ brew cask install android-sdk
 
 # Install Xamarin Studio
 brew cask install xamarin-studio
+brew cask install xamarin-android
+
+# Update android SDK
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
 
 # Buuuuut .... we also got to install Mono
 brew install wget
@@ -52,6 +56,7 @@ ln -s /usr/local/share/dotnet/dotnet /usr/local/bin
 brew install pmd
 
 # Install StyleCop
+# @link https://github.com/nelsonsar/StyleCop.Baboon
 brew install mercurial
 git clone https://github.com/nelsonsar/StyleCop.Baboon
 
@@ -66,7 +71,7 @@ sudo chmod 775 StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe
 wget https://cloud.github.com/downloads/spouliot/gendarme/gendarme-2.10-bin.zip
 unzip gendarme-2.10-bin.zip
 
-# Installation from source currently a work in progress
+# TODO Installation from source currently a work in progress
 # brew install autoconf pkg-config readline automake gettext glib intltool libtool
 # git clone https://github.com/mono/mono-tools
 # cd mono-tools

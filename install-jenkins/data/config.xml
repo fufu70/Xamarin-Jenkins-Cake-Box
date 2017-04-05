@@ -3,7 +3,17 @@
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
+  <properties>
+    <hudson.plugins.sidebar__link.ProjectLinks plugin="sidebar-link@1.7">
+      <links>
+        <hudson.plugins.sidebar__link.LinkAction>
+          <url>http://192.168.205.30:8080/job/xamarin-hello-world/ws/gendarme.html</url>
+          <text>Gendarme Results</text>
+          <icon>/userContent/pile-of-poop.png</icon>
+        </hudson.plugins.sidebar__link.LinkAction>
+      </links>
+    </hudson.plugins.sidebar__link.ProjectLinks>
+  </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@3.1.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
@@ -29,17 +39,26 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-sonar-scanner</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
 set +e
-/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe Settings.StyleCop /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/ /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/Properties/ &gt; StyleCop.log
+/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe Settings.StyleCop /Users/vagrant/.jenkins/workspace/xamarin-hello-world/ /Users/vagrant/.jenkins/workspace/xamarin-hello-world/Properties/ &gt; StyleCop.log
 exit 0</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-pmd cpd --minimum-tokens 100 --language cs --format xml --files ~/.jenkins/workspace/xamarin-cake-box-job/ &gt; pmd-cpd.xml</command>
+pmd cpd --minimum-tokens 100 --language cs --format xml --files ~/.jenkins/workspace/xamarin-hello-world/ &gt; pmd-cpd.xml</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+set +e
+# Clean files
+rm -rf bin
+rm -rf obj
+# Run XBuild
+/Library/Frameworks/Mono.framework/Versions/Current/Commands/xbuild HelloWorld.sln /verbosity:quiet /p:AndroidSdkDirectory=/usr/local/opt/android-sdk/
+# Run Gendarme
+/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --xml gendarme.xml /Users/vagrant/.jenkins/workspace/xamarin-hello-world/bin/Debug/*.dll
+/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --html gendarme.html /Users/vagrant/.jenkins/workspace/xamarin-hello-world/bin/Debug/*.dll
+exit 0</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -205,7 +224,7 @@ pmd cpd --minimum-tokens 100 --language cs --format xml --files ~/.jenkins/works
               <max>999</max>
               <unstable>999</unstable>
               <usePattern>false</usePattern>
-              <pattern></pattern>
+              <pattern>gendarme.xml</pattern>
             </hudson.plugins.violations.TypeConfig>
           </entry>
           <entry>

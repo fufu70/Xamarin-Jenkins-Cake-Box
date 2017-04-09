@@ -40,7 +40,7 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 set +e
-/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe Settings.StyleCop /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/ /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/Properties/ &gt; StyleCop.log
+/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe build/Settings.StyleCop /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/ /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/Properties/ &gt; StyleCop.log
 exit 0</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
@@ -56,8 +56,8 @@ rm -rf obj
 # Run XBuild
 /Library/Frameworks/Mono.framework/Versions/Current/Commands/xbuild HelloWorld.sln /verbosity:quiet /p:AndroidSdkDirectory=/usr/local/opt/android-sdk/
 # Run Gendarme
-/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --xml gendarme.xml /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/bin/Debug/*.dll
-/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --html gendarme.html /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/bin/Debug/*.dll
+/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --config build/gendarme-rules.xml --xml gendarme.xml /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/bin/Debug/*.dll
+/Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --config build/gendarme-rules.xml --html gendarme.html /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/bin/Debug/*.dll
 exit 0</command>
     </hudson.tasks.Shell>
   </builders>

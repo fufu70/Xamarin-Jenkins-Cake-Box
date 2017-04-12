@@ -54,7 +54,7 @@ set +e
 rm -rf bin
 rm -rf obj
 # Run XBuild
-/Library/Frameworks/Mono.framework/Versions/Current/Commands/xbuild HelloWorld.sln /verbosity:quiet /p:AndroidSdkDirectory=/usr/local/opt/android-sdk/
+/Library/Frameworks/Mono.framework/Versions/Current/Commands/xbuild HelloWorld.sln /verbosity:quiet /p:AndroidSdkDirectory=/usr/local/share/android-sdk/
 # Run Gendarme
 /Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --config build/gendarme-rules.xml --xml gendarme.xml /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/bin/Debug/*.dll
 /Library/Frameworks/Mono.framework/Versions/Current/bin/mono /Users/vagrant/gendarme.exe --quiet --config build/gendarme-rules.xml --html gendarme.html /Users/vagrant/.jenkins/workspace/xamarin-cake-box-job/bin/Debug/*.dll

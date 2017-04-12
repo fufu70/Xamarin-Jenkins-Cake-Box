@@ -11,6 +11,6 @@ echo -n "What is your Jenkins password: "
 read -s J_PASSWORD
 echo
 
-sudo java -jar jenkins-cli.jar -s http://localhost:8080/jenkins install-plugin envinject warnings analysis-core analysis-collector violations pmd dry sidebar-link --username "$J_USERNAME" --password "$J_PASSWORD"
+sudo java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin envinject warnings analysis-core analysis-collector violations pmd dry sidebar-link --username "$J_USERNAME" --password "$J_PASSWORD"
 
-sudo java -jar jenkins-cli.jar -s http://localhost:8080/jenkins safe-restart --username "$J_USERNAME" --password "$J_PASSWORD"
+sudo java -jar jenkins-cli.jar -s http://localhost:8080/ safe-restart --username "$J_USERNAME" --password "$J_PASSWORD"

@@ -12,6 +12,7 @@
 
 # Install Brew
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew update
 
 # Install Java through homebrew
 brew cask install java
@@ -21,14 +22,14 @@ brew install jenkins
 nohup jenkins &
 
 # Install the Android SDK
-brew cask install android-sdk
+brew install android-sdk
 
 # Install Xamarin Studio
 brew cask install xamarin-studio
 brew cask install xamarin-android
 
 # Update android SDK
-( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui
+( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --use-sdk-wrapper -u -a -t android-15,android-16,android-17,android-18,android-19,android-20,android-21,android-22,android-23,android-24,android-25
 
 # Buuuuut .... we also got to install Mono
 brew install wget
@@ -37,7 +38,6 @@ sudo installer -pkg MonoFramework-MDK-4.8.0.520.macos10.xamarin.universal.pkg -t
 sudo chmod 775 /Library/Frameworks/Mono.framework/Versions/Current/bin/mono
 
 # And .... the .Net core
-brew update
 brew install openssl
 mkdir -p /usr/local/lib
 ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
@@ -57,6 +57,7 @@ brew install pmd
 
 # Install StyleCop
 # @link https://github.com/nelsonsar/StyleCop.Baboon
+cd /Users/vagrant
 brew install mercurial
 git clone https://github.com/nelsonsar/StyleCop.Baboon
 
@@ -66,8 +67,10 @@ make # runs nuget and xbuild
 
 sudo chmod 775 StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe
 
+
 # Install Mono-Tools (for Gendarme) ... 
 # Currently only install Gendarme
+cd /Users/vagrant
 wget https://cloud.github.com/downloads/spouliot/gendarme/gendarme-2.10-bin.zip
 unzip gendarme-2.10-bin.zip
 
